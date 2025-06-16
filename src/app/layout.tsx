@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   title: "Agente GPS",
   description: "Sistema de monitoreo en tiempo real de unidades GPS",
   icons: {
-    icon: '/velsat.ico',
-    shortcut: '/velsat.ico',
-    apple: '/velsat.ico',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 
