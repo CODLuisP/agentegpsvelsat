@@ -31,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Usando el archivo ico.ico desde la carpeta public */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
