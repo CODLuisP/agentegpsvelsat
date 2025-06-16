@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Play,
@@ -28,7 +29,7 @@ interface GPSData {
   altitude?: number;
   heading?: number;
   deviceId?: string;
-  [key: string]: unknown;
+  [key: string]: unknown; 
 }
 
 interface ApiResponse {
@@ -36,15 +37,14 @@ interface ApiResponse {
   message?: string;
   data?: unknown;
   timestamp?: string;
-  [key: string]: unknown;
+  [key: string]: unknown; 
 }
+
 
 export default function GPSTrackerDashboard() {
   const [serverStatus, setServerStatus] = useState("stopped");
   const [lastSentData, setLastSentData] = useState<GPSData | null>(null);
-  const [lastApiResponse, setLastApiResponse] = useState<ApiResponse | null>(
-    null
-  );
+  const [lastApiResponse, setLastApiResponse] = useState<ApiResponse | null>(null);
   const [lastResponseTime, setLastResponseTime] = useState<string | null>(null);
   const [connectionStatus, setConnectionStatus] = useState("disconnected");
 
@@ -141,7 +141,7 @@ export default function GPSTrackerDashboard() {
     );
   };
 
-  return (
+return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white flex flex-col">
       {/* Header */}
       <div className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
@@ -189,12 +189,17 @@ export default function GPSTrackerDashboard() {
           </div>
         </div>
       </div>
-
+      
       {/* Main Content */}
       <div className="flex-1 container mx-auto px-3 sm:px-4 py-4 sm:py-6 ">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-4">
-          <div className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700">
+          <motion.div
+            className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="bg-blue-600/20 p-1.5 sm:p-2 rounded-lg">
                 <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
@@ -211,9 +216,14 @@ export default function GPSTrackerDashboard() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700">
+          <motion.div
+            className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="bg-green-600/20 p-1.5 sm:p-2 rounded-lg">
                 <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
@@ -227,9 +237,14 @@ export default function GPSTrackerDashboard() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700 sm:col-span-2 lg:col-span-1">
+          <motion.div
+            className="bg-gray-800/60 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-700 sm:col-span-2 lg:col-span-1"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="bg-purple-600/20 p-1.5 sm:p-2 rounded-lg">
                 <Database className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
@@ -245,13 +260,18 @@ export default function GPSTrackerDashboard() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-4">
           {/* Último envío */}
-          <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden">
+          <motion.div
+            className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+          >
             <div className="p-3 sm:p-4 border-b border-gray-700">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="bg-blue-600/20 p-1.5 sm:p-2 rounded-lg">
@@ -262,7 +282,11 @@ export default function GPSTrackerDashboard() {
                 </h2>
                 {serverStatus === "running" && (
                   <div className="ml-auto flex items-center gap-1 sm:gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                    <motion.div
+                      className="w-2 h-2 bg-green-400 rounded-full"
+                      animate={{ opacity: [1, 0.3, 1] }}
+                      transition={{ repeat: Infinity, duration: 1 }}
+                    />
                     <span className="text-xs text-green-400 hidden sm:inline">
                       Activo
                     </span>
@@ -291,10 +315,15 @@ export default function GPSTrackerDashboard() {
                 </pre>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Última respuesta */}
-          <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden">
+          <motion.div
+            className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+          >
             <div className="p-3 sm:p-4 border-b border-gray-700">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="bg-green-600/20 p-1.5 sm:p-2 rounded-lg">
@@ -314,12 +343,17 @@ export default function GPSTrackerDashboard() {
                 </pre>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Data Flow Visualization */}
-        <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 px-4 py-4 mb-6 sm:mb-6">
-          <div className="flex items-center gap-2 sm:gap-3 mb-0">
+        <motion.div
+          className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 px-4 py-4 mb-6 sm:mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <div className="flex items-center gap-2 sm:gap-3 mb-0 ">
             <div className="bg-purple-600/20 p-1.5 sm:p-2 rounded-lg">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
             </div>
@@ -344,7 +378,15 @@ export default function GPSTrackerDashboard() {
             <div className="flex flex-col items-center">
               <div className="w-0.5 h-12 bg-gradient-to-b from-blue-500 to-green-500 relative">
                 {serverStatus === "running" && (
-                  <div className="absolute top-0 left-[-4px] w-2 h-2 bg-white rounded-full animate-bounce" />
+                  <motion.div
+                    className="absolute w-2 h-2 bg-white rounded-full -left-0.75"
+                    animate={{ y: [0, 44] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "linear",
+                    }}
+                  />
                 )}
               </div>
               <div className="rotate-90">
@@ -366,7 +408,16 @@ export default function GPSTrackerDashboard() {
             <div className="flex flex-col items-center">
               <div className="w-0.5 h-12 bg-gradient-to-b from-green-500 to-purple-500 relative">
                 {serverStatus === "running" && (
-                  <div className="absolute top-0 left-[-4px] w-2 h-2 bg-white rounded-full animate-bounce delay-1000" />
+                  <motion.div
+                    className="absolute w-2 h-2 bg-white rounded-full -left-0.75"
+                    animate={{ y: [0, 44] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "linear",
+                      delay: 1,
+                    }}
+                  />
                 )}
               </div>
               <div className="rotate-90">
@@ -386,7 +437,7 @@ export default function GPSTrackerDashboard() {
           </div>
 
           {/* Desktop Flow - Horizontal */}
-          <div className="hidden sm:flex items-center justify-center gap-6 lg:gap-8 py-0">
+          <div className="hidden sm:flex items-center justify-center gap-6 lg:gap-8 py-0 ">
             {/* GPS Device */}
             <div className="flex flex-col items-center">
               <div className="bg-blue-600/20 p-4 rounded-full mb-2">
@@ -399,7 +450,15 @@ export default function GPSTrackerDashboard() {
             <div className="flex items-center">
               <div className="h-0.5 w-12 lg:w-16 bg-gradient-to-r from-blue-500 to-green-500 relative">
                 {serverStatus === "running" && (
-                  <div className="absolute top-[-4px] left-0 w-2 h-2 bg-white rounded-full animate-bounce" />
+                  <motion.div
+                    className="absolute w-2 h-2 bg-white rounded-full -top-0.75 -left-1"
+                    animate={{ x: [0, 48] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "linear",
+                    }}
+                  />
                 )}
               </div>
               <ArrowRight className="w-5 h-5 text-green-500 ml-1" />
@@ -417,7 +476,16 @@ export default function GPSTrackerDashboard() {
             <div className="flex items-center">
               <div className="h-0.5 w-12 lg:w-16 bg-gradient-to-r from-green-500 to-purple-500 relative">
                 {serverStatus === "running" && (
-                  <div className="absolute top-[-4px] left-0 w-2 h-2 bg-white rounded-full animate-bounce delay-1000" />
+                  <motion.div
+                    className="absolute w-2 h-2 bg-white rounded-full -top-0.75 -left-1"
+                    animate={{ x: [0, 48] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "linear",
+                      delay: 1,
+                    }}
+                  />
                 )}
               </div>
               <ArrowRight className="w-5 h-5 text-purple-500 ml-1" />
@@ -431,10 +499,15 @@ export default function GPSTrackerDashboard() {
               <span className="text-sm text-gray-400">API GOLDCAR</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Control Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 transition-opacity duration-500 opacity-100 translate-y-0">
+        <motion.div
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
           <button
             className={`flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
               serverStatus === "running"
@@ -460,11 +533,16 @@ export default function GPSTrackerDashboard() {
             <Square className="w-4 h-4 sm:w-5 sm:h-5" />
             Detener Servidor
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-800/50 backdrop-blur-sm border-t border-gray-700 mt-0 transition-opacity duration-500 opacity-100 translate-y-0">
+      <motion.footer 
+        className="bg-gray-800/50 backdrop-blur-sm border-t border-gray-700 mt-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
         <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Logo/Brand Section */}
@@ -476,9 +554,7 @@ export default function GPSTrackerDashboard() {
                 <h3 className="text-lg font-bold bg-gradient-to-r from-blue-200 via-gray-200 to-purple-200 bg-clip-text text-transparent">
                   VELSAT GPS
                 </h3>
-                <p className="text-xs text-gray-400">
-                  Desarrollado por IDEATEC
-                </p>
+                <p className="text-xs text-gray-400">Desarrollado por IDEATEC</p>
               </div>
             </div>
 
@@ -493,8 +569,10 @@ export default function GPSTrackerDashboard() {
               </div>
             </div>
           </div>
+
+   
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 }
