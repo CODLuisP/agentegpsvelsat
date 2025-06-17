@@ -521,7 +521,7 @@ return (
             Iniciar Servidor
           </button>
 
-          <button
+          {/* <button
             className={`flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
               serverStatus === "stopped"
                 ? "bg-gray-600 text-gray-400 cursor-not-allowed"
@@ -532,7 +532,9 @@ return (
           >
             <Square className="w-4 h-4 sm:w-5 sm:h-5" />
             Detener Servidor
-          </button>
+          </button> */}
+
+
         </motion.div>
       </div>
 
