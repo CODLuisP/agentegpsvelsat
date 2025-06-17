@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Play,
-  Square,
   Satellite,
   Clock,
   Activity,
@@ -110,15 +109,15 @@ export default function GPSTrackerDashboard() {
     }
   };
 
-  const handleDetener = async () => {
-    try {
-      await axios.post("https://sub.velsat.pe:8587/detener");
-      setServerStatus("stopped");
-    } catch (err) {
-      console.error("Error al detener servidor:", err);
-      alert("❌ Error al detener el servidor");
-    }
-  };
+  // const handleDetener = async () => {
+  //   try {
+  //     await axios.post("https://sub.velsat.pe:8587/detener");
+  //     setServerStatus("stopped");
+  //   } catch (err) {
+  //     console.error("Error al detener servidor:", err);
+  //     alert("❌ Error al detener el servidor");
+  //   }
+  // };
 
   const getConnectionIcon = () => {
     switch (connectionStatus) {
