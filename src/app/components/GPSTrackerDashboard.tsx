@@ -49,7 +49,7 @@ export default function GPSTrackerDashboard() {
 
   useEffect(() => {
     axios
-      .get("https://sub.velsat.pe:8587/estado")
+      .get("https://sub.velsat.pe:8443/estado")
       .then((res) => {
         const activo = res.data.activo;
         setServerStatus(activo ? "running" : "stopped");
@@ -59,7 +59,7 @@ export default function GPSTrackerDashboard() {
       });
 
     const connection = new HubConnectionBuilder()
-      .withUrl("https://sub.velsat.pe:8587/retransmisionhub")
+      .withUrl("https://sub.velsat.pe:8443/retransmisionhub")
       .configureLogging(LogLevel.Information)
       .build();
 
@@ -101,7 +101,7 @@ export default function GPSTrackerDashboard() {
 
   const handleIniciar = async () => {
     try {
-      await axios.post("https://sub.velsat.pe:8587/iniciar");
+      await axios.post("https://sub.velsat.pe:8443/iniciar");
       setServerStatus("running");
     } catch (err) {
       console.error("Error al iniciar servidor:", err);
